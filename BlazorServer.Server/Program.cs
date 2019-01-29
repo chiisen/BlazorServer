@@ -50,6 +50,7 @@ namespace BlazorServer.Server
                 .UseConfiguration(new ConfigurationBuilder()
                         .AddCommandLine(args)
                         .Build())
+                .UseUrls("http://*:5000")
                 .UseStartup<Startup>()
                 .ConfigureLogging(logging =>
                 {
