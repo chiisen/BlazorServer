@@ -23,7 +23,7 @@ namespace BlazorServer.Server
         public static void Main(string[] args)
         {
             // NLog: setup the logger first to catch all errors
-            _logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            _logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             SetNlogFileName();
             try
             {
