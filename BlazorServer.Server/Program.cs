@@ -5,14 +5,12 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
 using System;
+using static BlazorServer.Server.Log;
 
 namespace BlazorServer.Server
 {
     public class Program
     {
-        static string _logFileName = "";
-        public static Logger _logger = null;
-
         // 設定 NLog 檔名
         static void SetNlogFileName()
         {
@@ -23,19 +21,19 @@ namespace BlazorServer.Server
         public static void Main(string[] args)
         {
             // NLog: setup the logger first to catch all errors
-            _logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+            SetupTheLogger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             SetNlogFileName();
             try
             {
-                _logger.Warn("init main");
-                _logger.Warn("Log File Name:" + _logFileName);
+                Print("init main");
+                Print("Log File Name:" + _logFileName);
 
                 BuildWebHost(args).Run();
             }
             catch (Exception ex)
             {
                 //NLog: catch setup errors
-                _logger.Error(ex, "Stopped program because of exception");
+                Print("Stopped program because of exception \n" + ex.ToString());
                 throw;
             }
             finally
