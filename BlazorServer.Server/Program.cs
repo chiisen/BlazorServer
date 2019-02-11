@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
 using System;
+using System.IO;
 using static BlazorServer.Server.Log;
 
 namespace BlazorServer.Server
@@ -18,8 +19,16 @@ namespace BlazorServer.Server
             LogManager.Configuration.Variables["MY_DATE"] = _logFileName;
         }
 
+        static IConfigurationRoot _config;// 讀取 hosting.json 裡指定的 Port 的設定物件
+
         public static void Main(string[] args)
         {
+            // 讀取 hosting.json 裡的 Port 設定
+            _config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("hosting.json", optional: true)
+            .Build();
+
             // NLog: setup the logger first to catch all errors
             SetupTheLogger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             SetNlogFileName();
@@ -48,7 +57,8 @@ namespace BlazorServer.Server
                 .UseConfiguration(new ConfigurationBuilder()
                         .AddCommandLine(args)
                         .Build())
-                .UseUrls("http://*:5000")
+                //.UseUrls("http://*:5000") // 指定預設 Port 5000
+                .UseConfiguration(_config) // 讀取 hosting.json 裡面設定的 Port 60000 與 60001
                 .UseStartup<Startup>()
                 .ConfigureLogging(logging =>
                 {
