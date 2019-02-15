@@ -15,8 +15,7 @@ namespace BlazorServer.Server
         // 設定 NLog 檔名
         static void SetNlogFileName()
         {
-            _logFileName = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-            LogManager.Configuration.Variables["MY_DATE"] = _logFileName;
+            LogManager.Configuration.Variables["MY_DATE"] = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
         }
 
         static IConfigurationRoot _config;// 讀取 hosting.json 裡指定的 Port 的設定物件
@@ -30,12 +29,11 @@ namespace BlazorServer.Server
             .Build();
 
             // NLog: setup the logger first to catch all errors
-            SetupTheLogger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
+            SetupLogger();
             SetNlogFileName();
             try
             {
                 Print("init main");
-                Print("Log File Name:" + _logFileName);
 
                 BuildWebHost(args).Run();
             }
