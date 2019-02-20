@@ -1,4 +1,6 @@
-﻿using NLog;
+﻿using BlazorServer.Server.Controllers;
+using Microsoft.Extensions.Logging;
+using NLog;
 using NLog.Web;
 using System.Diagnostics;
 using System.IO;
@@ -25,6 +27,14 @@ namespace BlazorServer.Server
                 _logger = NLogBuilder.ConfigureNLog("NLog.config").GetCurrentClassLogger();
             }
         }
+
+        /*
+        private static ILogger<SameController> _ilogger;
+        public static ILogger<SameController> SetupTheIlogger
+        {
+            set { _ilogger = value; }
+        }
+        */
 
         public static void Print(string msg, LOGGER l = LOGGER.Warn)
         {

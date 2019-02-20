@@ -29,6 +29,23 @@ namespace BlazorServer.Server
             }
         }
 
+        public class Logger
+        {
+            public string createtime = "";
+            public string log = "";
+
+            // 特殊建構式有定義例如：public Logger(string create, string log)，一定要定義 default 建構式，這樣才能正常執行
+            public Logger()
+            {
+            }
+
+            public Logger(string create, string log)
+            {
+                createtime = create;
+                this.log = log;
+            }
+        }
+
         public static string _dbPath = Directory.GetCurrentDirectory() + @"/database.sqlite";
         static string _cnStr = string.Format(@"data source={0}", _dbPath);
 
@@ -95,6 +112,44 @@ namespace BlazorServer.Server
             }
         }
 
+        // SQLite 初始化 My 資料庫
+        public static int InitMySQLite()
+        {
+            if (File.Exists(_dbPath))
+            {
+                Print("資料庫已存在：" + _dbPath);
+                return -1;
+            }
+
+            using (var cn_ = new SQLiteConnection(_cnStr))
+            {
+                cn_.Open();
+                string sql = @"
+                CREATE TABLE 'account' 
+                (   
+                    'username' TEXT, 
+                    'password' TEXT 
+                )";
+                SQLiteCommand cmd = new SQLiteCommand(sql, cn_);
+                cmd.ExecuteNonQuery();
+            }
+
+            using (var cn_ = new SQLiteConnection(_cnStr))
+            {
+                cn_.Open();
+                string sql = @"
+                CREATE TABLE 'logger' 
+                (   
+                    'createtime' TEXT, 
+                    'log' TEXT 
+                )";
+                SQLiteCommand cmd = new SQLiteCommand(sql, cn_);
+                cmd.ExecuteNonQuery();
+            }
+
+            return 0;
+        }
+
         // SQLite 新增
         public static int InsertSQLite(Account acc)
         {
@@ -156,6 +211,21 @@ namespace BlazorServer.Server
             }
         }
 
+        // Dapper 查詢
+        public static List<Account> SelectAccount(string sql)
+        {
+            //Print(_cnStr);
+            using (IDbConnection cnn_ = new SQLiteConnection(_cnStr))
+            {
+                cnn_.Open();
+                var output_ = cnn_.Query<Account>(sql, new DynamicParameters());
+
+                List<Account> acc_ = output_.ToList();
+                acc_.ForEach(x => Print(string.Format(@"username={0} password={1}", x.username, x.password)));
+                return acc_;
+            }
+        }
+
         // Dapper 新增
         public static void InsertAccount(Account acc)
         {
@@ -164,6 +234,18 @@ namespace BlazorServer.Server
             {
                 cnn_.Open();
                 string sql_ = string.Format(@"insert into account (username,password) values('{0}','{1}')", acc.username, acc.password);
+                cnn_.Execute(sql_);
+            }
+        }
+
+        // Dapper 新增
+        public static void InsertLogger(Logger log)
+        {
+            //Print(_cnStr);
+            using (IDbConnection cnn_ = new SQLiteConnection(_cnStr))
+            {
+                cnn_.Open();
+                string sql_ = string.Format(@"insert into logger (createtime,log) values('{0}','{1}')", log.createtime, log.log);
                 cnn_.Execute(sql_);
             }
         }
