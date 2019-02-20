@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,6 +31,13 @@ namespace BlazorServer.Server
 
         public static string _dbPath = Directory.GetCurrentDirectory() + @"/database.sqlite";
         static string _cnStr = string.Format(@"data source={0}", _dbPath);
+
+        static string _serverIP = "inspireq-digitalassets.cfr4ol3udric.us-west-2.rds.amazonaws.com";
+        static string _username = "IQ_DA_DB_Admin";
+        static string _password = "holoportation";
+        static string _database = "so";
+        public static string _cnMySqlStr = string.Format("server={0};port=3306;user id={1};password={2};database={3};charset=utf8;", _serverIP, _username, _password, _database);
+        // 連接 MySQL 只要把 SQLiteConnection 改成 MySqlConnection 就可以了
 
         static bool isTest = false;
 
