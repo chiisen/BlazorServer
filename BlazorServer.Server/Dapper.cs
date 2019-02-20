@@ -154,6 +154,7 @@ namespace BlazorServer.Server
             //Print(_cnStr);
             using (IDbConnection cnn_ = new SQLiteConnection(_cnStr))
             {
+                cnn_.Open();
                 string sql_ = string.Format(@"insert into account (username,password) values('{0}','{1}')", acc.username, acc.password);
                 cnn_.Execute(sql_);
             }
@@ -165,6 +166,7 @@ namespace BlazorServer.Server
             //Print(_cnStr);
             using (IDbConnection cnn_ = new SQLiteConnection(_cnStr))
             {
+                cnn_.Open();
                 string sql_ = string.Format(@"delete from account where username='{0}'", user);
                 return cnn_.Execute(sql_);
             }
@@ -175,6 +177,7 @@ namespace BlazorServer.Server
             //Print(_cnStr);
             using (IDbConnection cnn_ = new SQLiteConnection(_cnStr))
             {
+                cnn_.Open();
                 string sql_ = string.Format(@"update account set password = '{0}' where username='{1}'", acc.password, acc.username);
                 cnn_.Execute(sql_, acc);
             }
