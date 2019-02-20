@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Database\database.sqlite">
+    <None Update="database.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
