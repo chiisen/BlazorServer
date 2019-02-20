@@ -6,6 +6,7 @@ using NLog;
 using NLog.Web;
 using System;
 using System.IO;
+using static BlazorServer.Server.Dapper;
 using static BlazorServer.Server.Log;
 
 namespace BlazorServer.Server
@@ -34,6 +35,11 @@ namespace BlazorServer.Server
             try
             {
                 Print("init main");
+
+
+                // 測試 SQlite database 與 Dapper
+                DapperTest();
+
 
                 BuildWebHost(args).Run();
             }
