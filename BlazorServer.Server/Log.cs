@@ -28,14 +28,6 @@ namespace BlazorServer.Server
             }
         }
 
-        /*
-        private static ILogger<SameController> _ilogger;
-        public static ILogger<SameController> SetupTheIlogger
-        {
-            set { _ilogger = value; }
-        }
-        */
-
         public static void Print(string msg, LOGGER l = LOGGER.Warn)
         {
             // 新增 印出 程式碼的行號

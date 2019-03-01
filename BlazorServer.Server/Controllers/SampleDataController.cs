@@ -1,9 +1,10 @@
 ﻿using BlazorServer.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using static BlazorServer.Server.Log;
 
 namespace BlazorServer.Server.Controllers
 {
@@ -18,6 +19,8 @@ namespace BlazorServer.Server.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
+            Print("收到 Client 呼叫 api/SampleData/WeatherForecasts");
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
