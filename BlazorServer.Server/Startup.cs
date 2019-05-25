@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
+using NSwag.AspNetCore;
 using System.Linq;
 using System.Net.Mime;
 
@@ -15,6 +16,15 @@ namespace BlazorServer.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+
+            #region Register the Swagger services
+
+            // Register the Swagger services
+            services.AddSwaggerDocument();
+
+            #endregion Register the Swagger services
+
 
             services.AddResponseCompression(options =>
             {
@@ -35,6 +45,17 @@ namespace BlazorServer.Server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
+            #region Register the Swagger generator and the Swagger UI middlewares
+
+            // Register the Swagger generator and the Swagger UI middlewares
+
+            app.UseSwagger();
+            app.UseSwaggerUi3();
+
+            #endregion Register the Swagger generator and the Swagger UI middlewares
+
 
             app.UseMvc(routes =>
             {

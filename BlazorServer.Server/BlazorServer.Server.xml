@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BlazorServer.Server</name>
+    </assembly>
+    <members>
+        <member name="T:BlazorServer.Server.Controllers.SampleDataController">
+            <summary>
+            簡單的 Controller 範例
+            </summary>
+        </member>
+        <member name="F:BlazorServer.Server.Controllers.SampleDataController.Summaries">
+            <summary>
+            氣溫感受狀況
+            </summary>
+        </member>
+        <member name="M:BlazorServer.Server.Controllers.SampleDataController.WeatherForecasts">
+            <summary>
+            取得氣溫資料列表
+            </summary>
+            <returns>回傳氣溫資料陣列給用戶</returns>
+        </member>
+    </members>
+</doc>
