@@ -6,8 +6,14 @@
     <members>
         <member name="T:BlazorServer.Server.Controllers.SampleDataController">
             <summary>
-            簡單的 Controller 範例
+            http://localhost:port/swagger 可以看到 swagger UI
             </summary>
+        </member>
+        <member name="M:BlazorServer.Server.Controllers.SampleDataController.Get">
+            <summary>
+            http://localhost:port/profiler/results 可以看到 MiniProfiler
+            </summary>
+            <returns></returns>
         </member>
         <member name="F:BlazorServer.Server.Controllers.SampleDataController.Summaries">
             <summary>

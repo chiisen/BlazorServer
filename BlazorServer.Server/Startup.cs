@@ -18,6 +18,13 @@ namespace BlazorServer.Server
             services.AddMvc();
 
 
+            #region Register the MiniProfiler services
+
+            services.AddMiniProfiler(options => options.RouteBasePath = "/profiler");
+
+            #endregion Register the MiniProfiler services
+
+
             #region Register the Swagger services
 
             // Register the Swagger services
@@ -45,6 +52,13 @@ namespace BlazorServer.Server
             {
                 app.UseDeveloperExceptionPage();
             }
+
+
+            #region Register the MiniProfiler
+
+            app.UseMiniProfiler();
+
+            #endregion Register the MiniProfiler
 
 
             #region Register the Swagger generator and the Swagger UI middlewares
