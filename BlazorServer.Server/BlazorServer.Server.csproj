@@ -35,6 +35,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="appsettings.Debug.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="appsettings.Release.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="hosting.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
