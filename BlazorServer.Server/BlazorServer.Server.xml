@@ -26,5 +26,20 @@
             </summary>
             <returns>回傳氣溫資料陣列給用戶</returns>
         </member>
+        <member name="T:BlazorServer.Server.DebuggingProperties">
+            <summary>
+            包含在運行時判斷編譯器編譯配置中調試信息相關的屬性。
+            </summary>
+        </member>
+        <member name="P:BlazorServer.Server.DebuggingProperties.IsDebug">
+            <summary>
+            檢查當前正在運行的主程序是否是在 Debug 配置下編譯生成的。
+            </summary>
+        </member>
+        <member name="P:BlazorServer.Server.DebuggingProperties.Config">
+            <summary>
+            檢查當前正在運行的主程序配置。
+            </summary>
+        </member>
     </members>
 </doc>

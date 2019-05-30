@@ -1,6 +1,5 @@
 ﻿using BlazorServer.Shared;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
